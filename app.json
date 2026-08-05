@@ -1,0 +1,54 @@
+{
+  "expo": {
+    "name": "英語名言 日めくりカレンダー",
+    "slug": "eng-daily",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "eng-daily",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.engdaily.app",
+      "infoPlist": {
+        "NSPhotoLibraryAddUsageDescription": "名言カードを画像として写真に保存するために使用します。"
+      }
+    },
+    "android": {
+      "package": "com.engdaily.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#f3f2f2",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.SCHEDULE_EXACT_ALARM"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-sharing",
+      "expo-font",
+      "@react-native-community/datetimepicker",
+      "expo-splash-screen",
+      [
+        "expo-notifications",
+        {
+          "color": "#ec3013"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "名言カードを画像として写真に保存するために使用します。",
+          "savePhotosPermission": "名言カードを画像として写真に保存するために使用します。"
+        }
+      ],
+      "@bacons/apple-targets"
+    ]
+  }
+}

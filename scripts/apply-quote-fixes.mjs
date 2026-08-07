@@ -1,6 +1,8 @@
-// One-off fact-check remediation script. Loads src/data/quotes.ts, applies a
-// patch map (partial field overrides by id), validates uniqueness/integrity,
-// and rewrites the file in the same format. Delete after use.
+// Historical record of the 2026-08 fact-check remediation pass over all 365
+// quotes (see git log for the corresponding commits). Loads src/data/quotes.ts,
+// applies the patch map below (partial field overrides by id), validates
+// uniqueness/integrity, and rewrites the file in the same format. Already
+// applied — re-running is a harmless no-op against the current data.
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -357,6 +359,121 @@ const PATCHES = {
     ja: "離れていると、想いはより募る。",
     note: "\"make + O + 動詞の原形\" は「Oを〜させる」という使役表現。grow はここでは「〜になる」という意味の動詞。",
   },
+
+  // --- Jan(1-20)/Feb/Mar batch ---
+  "01-05": {
+    en: "A leopard cannot change its spots.",
+    author: "English Proverb",
+    ja: "ヒョウは自分の斑点を変えられない。（生まれ持った性質は変わらない）",
+    note: "\"cannot ~\" は不可能を表す表現。spots はヒョウの体の模様「斑点」のこと。",
+  },
+  "01-08": {
+    en: "Forewarned is forearmed.",
+    author: "English Proverb",
+    ja: "前もって知っていれば、前もって備えられる。",
+    note: "forewarned・forearmed はどちらも fore-（前もって）+ 過去分詞の形。",
+  },
+  "01-13": {
+    en: "After a storm comes a calm.",
+    author: "English Proverb",
+    ja: "嵐のあとには、凪が来る。",
+    note: "\"comes a calm\" は主語と動詞が倒置された形。通常語順は \"a calm comes\"。",
+  },
+  "01-14": { author: "Proverb" },
+  "01-16": { author: "Proverb" },
+  "01-19": { author: "Proverb" },
+  "02-01": {
+    author: "John Lubbock",
+  },
+  "02-02": { author: "Proverb" },
+  "02-05": {
+    en: "A friend in need is a friend indeed.",
+    author: "English Proverb",
+    ja: "困った時の友こそ、真の友。",
+    note: "\"in need\" は「困っているときに」という意味の句。indeed は「本当に」を強調する副詞。",
+  },
+  "02-09": {
+    en: "Charity begins at home.",
+    author: "English Proverb",
+    ja: "慈善はまず家庭から始まる。",
+    note: "\"begin at X\" は「Xから始まる」という意味の表現。",
+  },
+  "02-10": { author: "Proverb" },
+  "02-12": { author: "Proverb" },
+  "02-17": { author: "Proverb" },
+  "02-20": { author: "Proverb" },
+  "02-21": {
+    en: "Where there is unity, there is strength.",
+    author: "English Proverb",
+    ja: "団結あるところに、力あり。",
+    note: "\"where there is A, there is B\" は「Aがある所には、Bがある」という構文。",
+  },
+  "02-22": {
+    en: "It is never too late to learn.",
+    author: "English Proverb",
+    ja: "学ぶのに、遅すぎるということはない。",
+    note: "\"it is never too late to ~\" は「〜するのに遅すぎることはない」という意味の構文。",
+  },
+  "02-23": {
+    en: "The more you learn, the more you realize how much you don't know.",
+    author: "Proverb",
+    ja: "学べば学ぶほど、自分がいかに知らないかを思い知る。",
+    note: "\"the more A, the more B\" は「Aすればするほど、ますますB」という比例を表す構文。",
+  },
+  "02-25": {
+    en: "A good name is better than riches.",
+    author: "English Proverb",
+    ja: "良い評判は、富にまさる。",
+    note: "\"better than X\" は「Xより良い」という意味の比較表現。",
+  },
+  "02-27": {
+    en: "Philosophy begins in wonder.",
+    author: "Socrates",
+    ja: "哲学は、驚きの中から始まる。",
+    note: "\"begin in X\" は「Xの中から始まる」という意味の表現。プラトン『テアイテトス』でソクラテスが語った言葉として知られる。",
+  },
+  "03-05": {
+    en: "Better safe than sorry.",
+    author: "English Proverb",
+    ja: "後で後悔するより、安全を取れ。",
+    note: "\"better A than B\" は「BよりAの方が良い」という比較表現。",
+  },
+  "03-07": { author: "Proverb" },
+  "03-08": {
+    en: "There is no royal road to learning.",
+    author: "English Proverb",
+    ja: "学問に王道なし。",
+    note: "\"royal road\" は「王だけが通れる楽な道」から転じて「近道、楽な方法」を意味する比喩表現。",
+  },
+  "03-11": { author: "Proverb" },
+  "03-15": {
+    en: "The darkest hour is just before the dawn.",
+    author: "English Proverb",
+    ja: "夜明け前が、一番暗い。",
+    note: "\"just before X\" は「Xの直前に」という意味の表現。",
+  },
+  "03-18": {
+    en: "All that glitters is not gold.",
+    author: "English Proverb",
+    ja: "光るものすべてが、金とは限らない。",
+    note: "\"all that glitters\" は「輝くものすべて」。関係代名詞 that を使った表現。",
+  },
+  "03-19": {
+    en: "Great oaks from little acorns grow.",
+    author: "English Proverb",
+    ja: "大きな樫の木も、小さなどんぐりから育つ。",
+    note: "\"grow\" は自動詞で「育つ」という意味。ここでは倒置により文末に置かれている。",
+  },
+  "03-25": {
+    en: "Beauty is in the eye of the beholder.",
+    author: "English Proverb",
+    ja: "美は、見る人の目の中にある。（美的感覚は人それぞれ）",
+    note: "\"beholder\" は「見る人」という意味の名詞。behold（じっと見る）から派生。",
+  },
+  "03-27": { author: "Proverb" },
+  "03-28": { author: "Proverb" },
+  "03-29": { author: "Proverb" },
+  "03-30": { author: "Proverb" },
 };
 
 // Ids whose author is an unverifiable hyper-specific "[Nation] Proverb" label

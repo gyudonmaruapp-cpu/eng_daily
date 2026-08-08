@@ -11,7 +11,8 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.engdaily.app",
       "infoPlist": {
-        "NSPhotoLibraryAddUsageDescription": "名言カードを画像として写真に保存するために使用します。"
+        "NSPhotoLibraryAddUsageDescription": "名言カードを画像として写真に保存するために使用します。",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {

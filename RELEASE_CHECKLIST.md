@@ -40,10 +40,8 @@
 - [x] **`src/utils/ads.native.ts` の `BANNER_AD_UNIT_ID` を実IDに差し替える**（`ca-app-pub-8619552988214526/8570019455`。開発ビルドでは `__DEV__` 判定で自動的にテストIDへフォールバックするので、開発中に実際の広告をクリックしてしまう心配はない）
 - [ ] **AdMob管理画面でも「児童向けタグ」が付いていないか確認する**
   - コード側（`tagForChildDirectedTreatment: false`）は設定済み。管理画面のアプリ設定で「主に児童向けアプリですか？」に「いいえ」で回答されているか一度見ておくと確実
-- [ ] **SKAdNetworkItems のリストを最新版に差し替える** ⚠️ 未対応
-  - `app.json` の `skAdNetworkItems` には今 Google 自身のID（`cstr6suwn9.skadnetwork`）**1件しか入っていない**
-  - Google は自社IDに加えて「参加する third-party buyers」のIDを全部載せることを推奨している。ここが不足していると iOS 上での広告のアトリビューションが取れず、**広告単価・収益に直接影響する**
-  - 最新の一覧は [Google公式ドキュメント](https://developers.google.com/admob/ios/privacy/strategies) からコピーする（リストは随時更新されるため、ここには転記していない。提出直前に取得するのが確実）
+- [x] **SKAdNetworkItems のリストを最新版に差し替えた**（Google公式ドキュメントの50件を反映済み。次のビルドから有効）
+  - リストは今後Googleが随時更新する可能性がある。数ヶ月に一度、[このページ](https://developers.google.com/admob/ios/privacy/strategies)と見比べておくと安心
 - [ ] **プライバシーマニフェスト（`ios.privacyManifests`）を設定するか検討する** ⚠️ 未対応
   - Expo は `app.json` の `ios.privacyManifests` から `PrivacyInfo.xcprivacy` を生成できるが、今は未設定
   - 使用中のライブラリのうち、データに触れる `@react-native-async-storage/async-storage` と `react-native-view-shot` は**それぞれ自前のマニフェストを同梱している**ので、required-reason API 部分は概ねカバーされている見込み

@@ -28,11 +28,6 @@ struct QuoteEntry: TimelineEntry {
     let quote: DailyQuote
 }
 
-// Decimal (not hex) components divided by an explicit Double literal --
-// `0x20 / 255` left the compiler unable to settle on Double for the whole
-// Color(red:green:blue:) call, which surfaced later as a bogus
-// "cannot conform to ShapeStyle" error at the .fill(accentColor) call site
-// rather than here at the real problem.
 private let inkColor = Color(red: 32.0 / 255.0, green: 30.0 / 255.0, blue: 29.0 / 255.0)
 private let accentColor = Color(red: 236.0 / 255.0, green: 48.0 / 255.0, blue: 19.0 / 255.0)
 private let accent700 = Color(red: 174.0 / 255.0, green: 24.0 / 255.0, blue: 0.0 / 255.0)
@@ -60,7 +55,11 @@ struct TodayQuoteWidgetEntryView: View {
         .padding(12)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .overlay(alignment: .top) {
-            Rectangle().fill(accentColor).frame(height: 3)
+            // Color itself conforms to View, so this avoids Shape.fill(_:)
+            // entirely -- that call was the one Xcode flagged as a bogus
+            // "cannot conform to ShapeStyle" error across two builds, even
+            // after ruling out the color literals themselves as the cause.
+            accentColor.frame(height: 3)
         }
         .containerBackground(surfaceColor, for: .widget)
     }

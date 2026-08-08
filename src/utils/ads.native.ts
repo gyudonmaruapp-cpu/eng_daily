@@ -2,12 +2,13 @@ import { Platform } from "react-native";
 import { getTrackingPermissionsAsync, requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 import mobileAds, { MaxAdContentRating, TestIds } from "react-native-google-mobile-ads";
 
-// Google's public test ad unit IDs — resolve to the right platform's test ID
-// automatically and are safe to ship while no real AdMob account is wired up.
-// Swap for a real ad unit ID (from your own AdMob account) before release;
-// see app.json's react-native-google-mobile-ads plugin config for the
-// matching App ID swap.
-export const BANNER_AD_UNIT_ID = TestIds.BANNER;
+// Real banner ad unit (AdMob account: gyudonmaru). AdMob policy requires
+// using test ads during development — clicking/serving your own real ad
+// units outside production counts as invalid traffic — so __DEV__ still
+// resolves to Google's public test ID. Release/preview/production builds
+// (__DEV__ false) use the real one.
+const REAL_BANNER_AD_UNIT_ID = "ca-app-pub-8619552988214526/8570019455";
+export const BANNER_AD_UNIT_ID = __DEV__ ? TestIds.BANNER : REAL_BANNER_AD_UNIT_ID;
 
 /**
  * Requests iOS App Tracking Transparency consent (no-op on Android, where

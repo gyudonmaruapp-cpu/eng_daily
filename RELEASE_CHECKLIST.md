@@ -24,13 +24,14 @@
 
 ## 2. アセット（アイコン・スプラッシュ・スクリーンショット）
 
-- [ ] **アプリアイコンをデザインする** **[要ユーザー or Claude可]**
-  - 今は `assets/icon.png` が Expo のデフォルトプレースホルダーのまま
-  - Expo は 1024×1024px の PNG 1枚（`icon.png`）を渡せば、iOS向けの各サイズに自動生成してくれる（透過なし推奨、Appleが背景を要求）
-  - Modernist のトークン（`--color-bg` #f3f2f2、`--color-accent` #ec3013、Archivo フォント）に合わせたシンプルな案なら、SVG/HTMLベースでこちらでも下書き可能。手描き感を出すなら Kalam を使ったロゴマーク案もあり
-  - `android-icon-foreground.png` / `android-icon-background.png` / `android-icon-monochrome.png` も同様に差し替えが必要（Android対応は将来分だが、ファイル自体は今の構成に含まれている）
-- [ ] **スプラッシュ画面をデザインする**
-  - `assets/splash-icon.png` が対象。Expo の splash screen 設定は `app.json` に無いため、`expo-splash-screen` のデフォルト（中央にアイコン）のままになっている。背景色や配置を変えたい場合は `app.json` に `splash` 設定を追加する必要がある
+- [x] **アプリアイコンをデザインする**
+  - Modernist のトークン（紙の地 #f3f2f2・赤いマージン罫線 #ec3013）と Archivo ExtraBold の「A」を組み合わせたものを `assets/` に生成済み
+  - `scripts/generate-icons.mjs` で再生成できる（デザインを変えたくなったらこのスクリプトを編集して再実行）。実行には `npm install --no-save sharp opentype.js` が必要
+  - `icon.png` はアルファチャンネルなしで出力済み（Appleは透過を含むアイコンを弾く）。Android用のアダプティブアイコン各種・favicon も同時生成される
+  - 60px まで縮めても赤い罫線と A が判別できることを確認済み
+- [x] **スプラッシュ画面用の画像を差し替える**
+  - `assets/splash-icon.png` を同じデザインで生成済み
+  - [ ] 背景色や配置を細かく調整したい場合は `app.json` に `splash` 設定を追加する（今は `expo-splash-screen` のデフォルト＝中央にアイコン）
 - [ ] **App Store 掲載用スクリーンショットを撮影する** **[要ユーザー]**
   - 6.9インチ（**1260 × 2736 px** 縦向き。iPhone 16/17 Pro Max、iPhone Air 等）が主要サイズ。これを出しておけば他サイズは自動で縮小されて使われる
   - 1〜10枚アップロード可能。**アルファチャンネル（透過）を含む画像は不可**

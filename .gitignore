@@ -44,3 +44,6 @@ yarn-error.*
 /.agents/
 /.claude/
 /skills-lock.json
+
+# icon variant previews (scratch)
+/.icon-preview/

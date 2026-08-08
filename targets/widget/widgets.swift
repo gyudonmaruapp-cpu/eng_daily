@@ -28,10 +28,15 @@ struct QuoteEntry: TimelineEntry {
     let quote: DailyQuote
 }
 
-private let inkColor = Color(red: 0x20 / 255, green: 0x1e / 255, blue: 0x1d / 255)
-private let accentColor = Color(red: 0xec / 255, green: 0x30 / 255, blue: 0x13 / 255)
-private let accent700 = Color(red: 0xae / 255, green: 0x18 / 255, blue: 0x00 / 255)
-private let surfaceColor = Color(red: 0xea / 255, green: 0xe9 / 255, blue: 0xe9 / 255)
+// Decimal (not hex) components divided by an explicit Double literal --
+// `0x20 / 255` left the compiler unable to settle on Double for the whole
+// Color(red:green:blue:) call, which surfaced later as a bogus
+// "cannot conform to ShapeStyle" error at the .fill(accentColor) call site
+// rather than here at the real problem.
+private let inkColor = Color(red: 32.0 / 255.0, green: 30.0 / 255.0, blue: 29.0 / 255.0)
+private let accentColor = Color(red: 236.0 / 255.0, green: 48.0 / 255.0, blue: 19.0 / 255.0)
+private let accent700 = Color(red: 174.0 / 255.0, green: 24.0 / 255.0, blue: 0.0 / 255.0)
+private let surfaceColor = Color(red: 234.0 / 255.0, green: 233.0 / 255.0, blue: 233.0 / 255.0)
 
 struct TodayQuoteWidgetEntryView: View {
     var entry: Provider.Entry

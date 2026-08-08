@@ -8,16 +8,9 @@
 
 ## 1. Apple Developer アカウント周り 【要ユーザー】
 
-- [ ] **Apple Developer Program に登録する**
-  - [https://developer.apple.com/programs/enroll/](https://developer.apple.com/programs/enroll/) から申し込む
-  - 年 $99（自動更新）。支払いはクレジットカード
-  - 個人（Individual）として登録する場合は Apple ID があればOK。屋号・法人（Organization）で登録する場合は D-U-N-S番号の取得が別途必要になり、審査に数日〜数週間かかることがある → 個人利用なら Individual 登録が圧倒的に早い
-  - 審査には通常 24〜48時間程度かかる（長引くこともある）ので、他の作業より先に着手しておく
-- [ ] **Team ID を確認する**
-  - 登録完了後、[developer.apple.com/account](https://developer.apple.com/account) → Membership details に表示される（英数10桁）
-  - もしくは Mac があれば Xcode → Settings → Accounts → 該当Appleアカウントを選択 → Team ID が表示される
-- [ ] **`app.json` の `expo.ios.appleTeamId` に Team ID を追加する**
-  - 今は未設定。ウィジェット（`@bacons/apple-targets`）のビルドに必須で、これがないと `expo prebuild` / EAS Build の iOS ビルドが失敗する
+- [x] **Apple Developer Program に登録する**（個人登録、Active）
+- [x] **Team ID を確認する**
+- [x] **`app.json` の `ios.appleTeamId` に Team ID を追加する**
 - [ ] **`app.json` の `ios.bundleIdentifier` / `android.package` を本番用の値に変更する**
   - 今は仮の `com.engdaily.app`。逆ドメイン形式（例: `com.あなたのドメインやアカウント名.engdaily`）で、App Store Connect に登録するBundle IDと一致させる必要がある
   - この値は**あとから変更できない**（Bundle IDは一度公開すると変更不可）ので、最終的に使いたい値をここで確定させる
@@ -174,7 +167,7 @@ eas submit -p ios                       # App Store Connect へアップロー�
 
 1. **Apple Developer Program 登録**（審査に1〜2日かかるので最優先で着手）
 2. 登録完了を待つ間に並行して進められるもの：AdMobアカウント作成、`docs/` を GitHub Pages で公開してURL確定、`STORE_LISTING.md` の掲載文レビュー
-3. Team ID が手に入ったら `app.json` を更新 → `eas build:configure`
+3. ~~Team ID が手に入ったら `app.json` を更新~~ 完了 → 次は `eas build:configure`
 4. `eas build -p ios --profile development` で development build を作り、実機で一通り動作確認（6章）
 5. 問題を直しつつ `preview` ビルドでスクリーンショット撮影・TestFlightで数人にテストしてもらう
 6. App Store Connect のメタデータ（7章）を埋める

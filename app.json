@@ -10,6 +10,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.engdaily.app",
+      "appleTeamId": "KK84RZRLR8",
       "infoPlist": {
         "NSPhotoLibraryAddUsageDescription": "名言カードを画像として写真に保存するために使用します。",
         "ITSAppUsesNonExemptEncryption": false

@@ -68,18 +68,21 @@
 
 ## 4. 法務（利用規約・プライバシーポリシー）
 
-- [x] 利用規約・プライバシーポリシーの草案作成（アプリ内画面 + `legal/index.html`）— **未レビューのテンプレート草案**
+- [x] 利用規約・プライバシーポリシーの草案作成（アプリ内画面 + `docs/privacy.html`）— **未レビューのテンプレート草案**
 - [ ] **内容を確認する** **[要ユーザー]**
   - 可能なら専門家（弁護士等）にレビューしてもらう。特に「広告配信」「未成年を含む利用者層」の2点は、指摘が入りやすいポイント
 - [ ] **連絡先メールアドレスをどうするか決める**
-  - 今は `tujuliangtai@gmail.com`（このセッションで参照できたアドレス）が `src/screens/LegalScreen.tsx` と `legal/index.html` の両方に入っている
+  - 今は `tujuliangtai@gmail.com`（このセッションで参照できたアドレス）が `src/screens/LegalScreen.tsx` と `docs/privacy.html`・`docs/support.html` に入っている
   - ⚠️ このアドレスは**アプリ内とストア掲載ページの両方で誰でも見られる状態になる**。個人のGmailをそのまま公開したくない場合は、アプリ専用のアドレスを別途用意して差し替えること（後から変えるより最初に決めた方が楽）
-- [ ] **`legal/index.html` を公開してURLを確定する**
-  - GitHub Pages を使う場合、標準のUIでは「リポジトリの `main` ブランチのルート」か「`/docs` フォルダ」しか公開元に選べない。今のファイルは `legal/index.html` にあるため、そのままではGitHub Pagesの標準設定では拾えない。**`legal/` を `docs/` にリネームするか、コピーを `docs/index.html` として置く**のが一番簡単
-  - あるいは [Netlify Drop](https://app.netlify.com/drop) に `legal` フォルダをドラッグ＆ドロップするだけでも、設定不要で即座に公開URLが発行される（一番手軽）
-- [ ] 確定したURLを以下の2箇所に反映する
-  - `legal/index.html`（または `docs/index.html`）内の連絡先・自己参照リンクがあれば更新
-  - App Store Connect の「App プライバシー」→「プライバシーポリシーURL」欄
+- [x] **GitHub Pages で公開できる形に配置済み**
+  - `docs/` に3ページ用意した（GitHub Pages の標準UIは「ブランチのルート」か「`/docs`」しか公開元に選べないため、`docs/` に置いてある）
+    - `docs/index.html` — アプリ紹介（マーケティングURL用）
+    - `docs/privacy.html` — 利用規約・プライバシーポリシー（**プライバシーポリシーURL用**）
+    - `docs/support.html` — サポート・FAQ・問い合わせ先（**サポートURL用**）
+- [ ] **公開設定をONにしてURLを確定する** **[要ユーザー]**
+  - GitHub にプッシュ後、リポジトリの Settings → Pages → Source で「Deploy from a branch」→ ブランチ `main` / フォルダ `/docs` を選ぶ
+  - GitHub を使わない場合は [Netlify Drop](https://app.netlify.com/drop) に `docs` フォルダをドラッグ＆ドロップするだけでも即座に公開URLが出る
+- [ ] 確定したURLを App Store Connect の「プライバシーポリシーURL」「サポートURL」欄に入力する（`STORE_LISTING.md` にURLの雛形あり）
 
 ## 5. iOS ウィジェット（WidgetKit）
 
@@ -114,16 +117,15 @@
 
 App Store Connect（[appstoreconnect.apple.com](https://appstoreconnect.apple.com)）でアプリを新規作成してから入力する項目。
 
-- [ ] アプリ名を決める（30文字以内。例:「英語名言 日めくりカレンダー」で問題なければそのまま）
-- [ ] サブタイトルを決める（30文字以内、検索にも影響する短いキャッチコピー）
-- [ ] プロモーション文（170文字以内）・詳細説明（4000文字以内）を書く（**Claude可**、下書きは手伝える）
-- [ ] キーワードを決める（100文字以内、カンマ区切り。例: 英語,名言,勉強,中学生,高校生,日めくり,ことわざ）
-- [ ] カテゴリを選ぶ（プライマリ: 教育 / セカンダリ: ライフスタイル など）
-- [ ] サポートURLを用意する（問い合わせ先ページ。今は何もない。簡易的にはGitHubリポジトリのIssueページやメールへのmailtoリンクでも可）
-- [ ] （任意）マーケティングURLを用意する
+- [x] **掲載文の下書きを用意した** → `STORE_LISTING.md`
+  - アプリ名・サブタイトル・プロモーションテキスト・説明文・キーワード・カテゴリ・What's New まで、そのまま貼れる形。文字数はすべて上限内であることを実測確認済み
+  - [ ] 内容を読んで、表現の好みを直す **[要ユーザー]**
+- [x] サポートURL用のページを用意した（`docs/support.html`。FAQ＋問い合わせ先）
+- [x] （任意）マーケティングURL用のページを用意した（`docs/index.html`）
 - [ ] **年齢レーティング質問票に回答する**（Kids Categoryには申請しない前提。広告の有無・ユーザー生成コンテンツの有無などを問われる）
 - [ ] **App Privacy（データ収集の申告＝プライバシーの「栄養成分表示」）に回答する**
   - AdMobが収集する「デバイス識別子（広告向け）」「使用状況データ」等を、Appleの分類に沿って正確に申告する必要がある。ここで実態と違う申告をすると審査で弾かれる、または後から指摘される
+  - **申告内容の対応表を `STORE_LISTING.md` にまとめてある**（どの項目をどう答えるか）
   - 参考: [App Privacy Details on the App Store](https://developer.apple.com/app-store/app-privacy-details/)
 - [ ] **IDFA（広告識別子）の使用を申告する**
   - 提出フォームに「このアプリは広告識別子（IDFA）を使用しますか？」という項目がある。AdMobを入れている以上 **「はい」** で、用途として「アプリ内で広告を配信する」にチェックする
@@ -171,7 +173,7 @@ eas submit -p ios                       # App Store Connect へアップロー�
 ## まず何からやるべきか（優先順）
 
 1. **Apple Developer Program 登録**（審査に1〜2日かかるので最優先で着手）
-2. 登録完了を待つ間に並行して進められるもの：AdMobアカウント作成、アイコン/スプラッシュのデザイン、説明文・キーワードの下書き、`legal/`→`docs/`へのリネームとホスティング
+2. 登録完了を待つ間に並行して進められるもの：AdMobアカウント作成、`docs/` を GitHub Pages で公開してURL確定、`STORE_LISTING.md` の掲載文レビュー
 3. Team ID が手に入ったら `app.json` を更新 → `eas build:configure`
 4. `eas build -p ios --profile development` で development build を作り、実機で一通り動作確認（6章）
 5. 問題を直しつつ `preview` ビルドでスクリーンショット撮影・TestFlightで数人にテストしてもらう

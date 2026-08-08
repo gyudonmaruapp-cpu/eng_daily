@@ -62,18 +62,23 @@ npm run sync-widget-quotes   # src/data/quotes.ts → targets/widget/QuoteData.s
 
 児童向けタグ（child-directed treatment）は付けていない。中高生だけでなく英語学習者全般を対象とする位置づけのため、Apple の Kids Category にも申請しない想定（申請すると広告SDKが使えなくなる）。
 
-## 利用規約・プライバシーポリシー
+## 公開用ページ（`docs/`）
 
-`src/screens/LegalScreen.tsx`（アプリ内の設定 → 利用規約・プライバシー から遷移）と `legal/index.html`（ストア掲載用に外部ホスティングする版、内容は同一）に草案がある。**専門家によるレビューを受けていないテンプレート草案** なので、実際に公開する前に確認すること。
+App Store 提出には「プライバシーポリシーURL」と「サポートURL」が必要なので、静的ページを `docs/` に用意してある。
 
-`legal/index.html` は GitHub Pages などで簡単にホストできる：
+| ファイル | 用途 |
+| --- | --- |
+| `docs/index.html` | アプリ紹介（マーケティングURL用） |
+| `docs/privacy.html` | 利用規約・プライバシーポリシー（プライバシーポリシーURL用） |
+| `docs/support.html` | サポート・FAQ・問い合わせ先（サポートURL用） |
 
-```sh
-# 例: GitHub Pages の場合、リポジトリの Settings → Pages で
-# ブランチ / legal フォルダを公開先に指定するだけ
-```
+GitHub Pages の標準UIは公開元に「ブランチのルート」か「`/docs`」しか選べないため、この配置にしてある。プッシュ後 Settings → Pages で `main` / `/docs` を選ぶだけで公開できる。
 
-公開したURLを、App Store Connect の「プライバシーポリシーURL」欄と、`legal/index.html` 内の連絡先メールアドレスに反映すること（今はプレースホルダーの `tujuliangtai@gmail.com` になっている）。
+利用規約・プライバシーポリシーの本文は、アプリ内画面（`src/screens/LegalScreen.tsx`、設定 → 利用規約・プライバシー から遷移）と `docs/privacy.html` に同じ内容が入っている。**どちらも専門家のレビューを受けていないテンプレート草案** なので、公開前に確認すること。連絡先メールアドレスも仮のものが入っているので、両方差し替えが必要。
+
+## ストア掲載情報
+
+`STORE_LISTING.md` に、App Store Connect に入力する項目（アプリ名・説明文・キーワード・App Privacy の申告内容など）の下書きをまとめてある。
 
 ## EAS Build（クラウドで iOS ビルド）
 
@@ -107,8 +112,11 @@ src/
   navigation/              タブ（今日/アーカイブ/お気に入り/設定）+ Share/QuoteDetail
   screens/                 各画面
 targets/widget/            iOS ホーム画面ウィジェット（Swift）
-legal/index.html           利用規約・プライバシーポリシー（ストア掲載用ホスティング版）
+docs/                      公開用の静的ページ（紹介 / 規約 / サポート）
 scripts/sync-widget-quotes.mjs   名言データをウィジェット用Swiftに変換
+scripts/generate-icons.mjs       アプリアイコン等の画像を生成
+RELEASE_CHECKLIST.md       公開までのタスク一覧
+STORE_LISTING.md           App Store 掲載文の下書き
 ```
 
 ## デザイン元

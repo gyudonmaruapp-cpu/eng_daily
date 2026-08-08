@@ -1,0 +1,68 @@
+/* Modernist tokens, mirroring src/theme/tokens.ts. */
+:root {
+  color-scheme: light;
+  --bg: #f3f2f2;
+  --ink: #201e1d;
+  --accent: #ec3013;
+  --accent-700: #ae1800;
+  --divider: rgba(32, 30, 29, 0.4);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 40px 20px 80px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+main { max-width: 640px; margin: 0 auto; }
+
+h1 { font-size: 26px; font-weight: 800; margin: 0 0 4px; letter-spacing: -0.015em; }
+h2 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 40px 0 16px;
+  padding-top: 24px;
+  border-top: 2px solid var(--divider);
+}
+h3 { font-size: 14px; font-weight: 600; color: var(--accent-700); margin: 20px 0 4px; }
+
+p { font-size: 13px; opacity: 0.85; margin: 0 0 12px; white-space: pre-line; }
+a { color: var(--accent); text-underline-offset: 3px; }
+
+.updated { font-size: 12px; opacity: 0.55; margin: 0 0 32px; }
+.disclaimer {
+  font-size: 11px;
+  opacity: 0.5;
+  margin-top: 40px;
+  border-top: 1px solid var(--divider);
+  padding-top: 12px;
+}
+
+/* Header rule: the app's red margin line, as a page motif. */
+.masthead {
+  border-left: 4px solid var(--accent);
+  padding-left: 16px;
+  margin-bottom: 32px;
+}
+.masthead h1 { margin-bottom: 6px; }
+.masthead .tagline { font-size: 13px; opacity: 0.7; margin: 0; }
+
+nav.pagelinks {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--divider);
+  font-size: 13px;
+}
+
+dl.faq { margin: 0; }
+dl.faq dt { font-weight: 600; font-size: 14px; margin-top: 24px; }
+dl.faq dd { margin: 6px 0 0; font-size: 13px; opacity: 0.85; }

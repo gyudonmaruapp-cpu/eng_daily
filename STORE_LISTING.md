@@ -131,11 +131,11 @@ App Store Connect に入力する項目の下書き。そのまま貼れる形�
 
 ## URL
 
-GitHub Pages 等で `docs/` を公開したあとのURL（`<ユーザー名>` `<リポジトリ名>` は実際の値に置き換える）:
+GitHub Pages で公開済み。App Store Connect の該当欄にそのまま貼る:
 
-- **サポートURL**（必須）: `https://<ユーザー名>.github.io/<リポジトリ名>/support.html`
-- **プライバシーポリシーURL**（必須）: `https://<ユーザー名>.github.io/<リポジトリ名>/privacy.html`
-- **マーケティングURL**（任意）: `https://<ユーザー名>.github.io/<リポジトリ名>/`
+- **サポートURL**（必須）: `https://gyudonmaruapp-cpu.github.io/eng_daily/support.html`
+- **プライバシーポリシーURL**（必須）: `https://gyudonmaruapp-cpu.github.io/eng_daily/privacy.html`
+- **マーケティングURL**（任意）: `https://gyudonmaruapp-cpu.github.io/eng_daily/`
 
 ---
 

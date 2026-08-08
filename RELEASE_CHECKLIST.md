@@ -67,10 +67,11 @@
     - `docs/privacy.html`：利用規約・プライバシーポリシー（**プライバシーポリシーURL用**）
     - `docs/support.html`：サポート・FAQ・問い合わせ先（**サポートURL用**）
 - [x] GitHub にプッシュ済み（`https://github.com/gyudonmaruapp-cpu/eng_daily`、Public）
-- [ ] **GitHub Pages の公開設定をONにしてURLを確定する** **[要ユーザー]**
-  - リポジトリの Settings → Pages → Source で「Deploy from a branch」→ ブランチ `main` / フォルダ `/docs` を選ぶ
-  - 公開されるURLはおそらく `https://gyudonmaruapp-cpu.github.io/eng_daily/`
-- [ ] 確定したURLを App Store Connect の「プライバシーポリシーURL」「サポートURL」欄に入力する（`STORE_LISTING.md` にURLの雛形あり）
+- [x] **GitHub Pages を公開済み**（`main` / `/docs`、3ページとも200 OKで応答確認済み）
+  - アプリ紹介: <https://gyudonmaruapp-cpu.github.io/eng_daily/>
+  - プライバシーポリシー: <https://gyudonmaruapp-cpu.github.io/eng_daily/privacy.html>
+  - サポート: <https://gyudonmaruapp-cpu.github.io/eng_daily/support.html>
+- [ ] 上記URLを App Store Connect の「プライバシーポリシーURL」「サポートURL」欄に入力する（`STORE_LISTING.md` に反映済み）
 
 ## 5. iOS ウィジェット（WidgetKit）
 
@@ -167,7 +168,7 @@ eas submit -p ios                       # App Store Connect へアップロー�
 2. ~~Team ID / Bundle ID 反映、AdMob ID 反映、EAS プロジェクト作成~~ 完了
 3. ~~連絡先メールアドレス決定、GitHubへのプッシュ~~ 完了
 4. **`eas build -p ios --profile development` を再実行する**（`npm ci` の失敗 → 修正済み、ウィジェットのSwiftコンパイルエラー → 修正済み。今度こそ通るはず）→ 実機にインストールして6章の項目を一通り確認
-5. 並行して進められるもの：GitHub Pages の公開設定をON、`STORE_LISTING.md` の掲載文レビュー、SKAdNetworkリストの更新
+5. 並行して進められるもの：`STORE_LISTING.md` の掲載文レビュー、SKAdNetworkリストの更新
 6. development build で見つかった問題を直しつつ、`preview` ビルドでスクリーンショット撮影・TestFlightで数人にテストしてもらう
 7. App Store Connect のメタデータ（7章）を埋める
 8. `production` ビルド → `eas submit` → 審査提出

@@ -34,19 +34,12 @@
 
 ## 3. 広告（AdMob） 【要ユーザー】
 
-- [x] `react-native-google-mobile-ads` の組み込み・バナー広告の設置（実装済み、テストID）
-- [ ] **AdMob アカウントを作成する**
-  - [https://admob.google.com/](https://admob.google.com/) から Google アカウントで登録
-- [ ] **アプリを登録してアプリID・広告ユニットIDを取得する**
-  - AdMob管理画面 → アプリ → 「アプリを追加」→ プラットフォーム: iOS → 「はい、App Storeに公開済みです」or「いいえ、まだです」（未公開でもアプリID発行は可能）
-  - 取得できるアプリID形式: `ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY`
-  - 続けて「広告ユニット」→「バナー」を作成し、広告ユニットIDを取得: `ca-app-pub-XXXXXXXXXXXXXXXX/ZZZZZZZZZZ`
-- [ ] **`app.json` の `iosAppId` を取得したアプリIDに差し替える**
-  - `plugins` 内の `react-native-google-mobile-ads` 設定ブロック
-- [ ] **`src/utils/ads.native.ts` の `BANNER_AD_UNIT_ID` を取得した広告ユニットIDに差し替える**
-  - 今は `TestIds.BANNER`（Google公式のテストID）になっている
-- [ ] **AdMob側で「児童向けタグ」を付けないことを確認する**
-  - アプリ登録時の質問「このアプリは主に児童向けですか？」で「いいえ」を選択（README・企画書の方針どおり、英語学習者全般がターゲットのため）
+- [x] `react-native-google-mobile-ads` の組み込み・バナー広告の設置
+- [x] **AdMob アカウントを作成し、アプリを登録してアプリID・広告ユニットIDを取得する**
+- [x] **`app.json` の `iosAppId` を実IDに差し替える**（`ca-app-pub-8619552988214526~7688182625`）
+- [x] **`src/utils/ads.native.ts` の `BANNER_AD_UNIT_ID` を実IDに差し替える**（`ca-app-pub-8619552988214526/8570019455`。開発ビルドでは `__DEV__` 判定で自動的にテストIDへフォールバックするので、開発中に実際の広告をクリックしてしまう心配はない）
+- [ ] **AdMob管理画面でも「児童向けタグ」が付いていないか確認する**
+  - コード側（`tagForChildDirectedTreatment: false`）は設定済み。管理画面のアプリ設定で「主に児童向けアプリですか？」に「いいえ」で回答されているか一度見ておくと確実
 - [ ] **SKAdNetworkItems のリストを最新版に差し替える** ⚠️ 未対応
   - `app.json` の `skAdNetworkItems` には今 Google 自身のID（`cstr6suwn9.skadnetwork`）**1件しか入っていない**
   - Google は自社IDに加えて「参加する third-party buyers」のIDを全部載せることを推奨している。ここが不足していると iOS 上での広告のアトリビューションが取れず、**広告単価・収益に直接影響する**
@@ -56,14 +49,15 @@
   - 使用中のライブラリのうち、データに触れる `@react-native-async-storage/async-storage` と `react-native-view-shot` は**それぞれ自前のマニフェストを同梱している**ので、required-reason API 部分は概ねカバーされている見込み
   - 一方 **`NSPrivacyTracking` / `NSPrivacyTrackingDomains`（トラッキング申告）はアプリ側の責任**。ATT を使って広告を出す以上、ここの設定は検討が必要
   - ただし `NSPrivacyTrackingDomains` に挙げたドメインは、ATT拒否時に iOS が通信をブロックするため、**間違ったドメインを書くと広告配信が壊れる**。推測で書かず、Google のドキュメントを確認した上で設定すること
-- [ ] ID差し替え後、**ネイティブビルドを作り直す**（JSだけの変更では反映されない。EAS Build 必須）
-- [ ] 実機で広告が実際に表示されることを確認する（テストIDのままだと収益は発生しない）
+- [ ] ID差し替え後、**ネイティブビルドを作り直す**（JSだけの変更では反映されない。development/preview ビルドで自動的に反映される）
+- [ ] 実機で広告が実際に表示されることを確認する
 
 ## 4. 法務（利用規約・プライバシーポリシー）
 
-- [x] 利用規約・プライバシーポリシーの草案作成（アプリ内画面 + `docs/privacy.html`）。**未レビューのテンプレート草案**
-- [ ] **内容を確認する** **[要ユーザー]**
-  - 可能なら専門家（弁護士等）にレビューしてもらう。特に「広告配信」「未成年を含む利用者層」の2点は、指摘が入りやすいポイント
+- [x] 利用規約・プライバシーポリシーの草案作成（アプリ内画面 + `docs/privacy.html`）
+- [x] **内容をレビューして精度を上げた**
+  - AdMobの実際のデータ収集内容の明記、「個人情報を収集しない」とAdMobのデータ処理の混同を分離、免責範囲を「法令上認められる範囲で」に限定、準拠法の見出し不整合を修正、子ども向けでない旨を明確化、公開ページから「草案です」の注記を削除、など
+  - 専門家（弁護士等）による正式レビューはまだ。広告SDKを使うアプリとしては水準に達しているはずだが、心配なら念のため一度目を通してもらうと安心
 - [ ] **連絡先メールアドレスをどうするか決める**
   - 今は `tujuliangtai@gmail.com`（このセッションで参照できたアドレス）が `src/screens/LegalScreen.tsx` と `docs/privacy.html`・`docs/support.html` に入っている
   - ⚠️ このアドレスは**アプリ内とストア掲載ページの両方で誰でも見られる状態になる**。個人のGmailをそのまま公開したくない場合は、アプリ専用のアドレスを別途用意して差し替えること（後から変えるより最初に決めた方が楽）
@@ -90,11 +84,14 @@
 
 現状、動作確認は TypeScript の型チェックと Web バンドルのエクスポートのみ。実機・シミュレータでは一度も動かしていない。特に **AdMob・ウィジェット・通知の一部はネイティブコードを含むため Expo Go では動作せず、development build が必要。**
 
+- [x] `expo-dev-client` を導入済み（development build に必須、これが無いとビルド自体が拒否される）
+- [x] EAS の証明書・プロビジョニングプロファイルをセットアップ済み（本体・ウィジェット両方のBundle ID分。デバイス登録も完了）
+- [x] `npm ci` がビルドサーバー上で失敗する問題を修正済み（`@expo/require-utils` のバージョン不整合が原因、`package.json` に `overrides` を追加して解決）
 - [ ] **development build を作る**（Expo Go の代わりに、このアプリ専用のネイティブモジュール込みインストーラ）
   ```sh
   eas build -p ios --profile development
   ```
-  `eas.json` の `development` プロファイルは既に用意済み（`developmentClient: true`）
+  `eas.json` の `development` プロファイルは既に用意済み（`developmentClient: true`）。前回の試行は上記の `npm ci` 問題で失敗しているので、**再実行が必要**
 - [ ] ビルドしたdevelopment buildを実機にインストールし、`npx expo start --dev-client` でJS側をつないで開発・確認する（コード変更のたびにネイティブビルドし直さなくてよい）
 - [ ] 全画面を一通り触る（ホーム/アーカイブ/お気に入り/設定/シェア）
 - [ ] 通知：設定画面で時刻を変更 → 実際にその時刻に通知が届くか確認（許可ダイアログが出るはず）
@@ -145,8 +142,8 @@ eas build -p ios --profile production   # 本番提出用
 eas submit -p ios                       # App Store Connect へアップロード
 ```
 
-- [ ] `eas build:configure` を実行する（Apple IDでのログイン・証明書自動生成が走る。初回は対話式でいくつか質問される）
-- [ ] development ビルドで実機テスト（セクション6）
+- [x] `eas login` / `eas init` / `eas build:configure` を実行済み（Expoプロジェクト作成・iOS証明書とプロビジョニングプロファイル生成・デバイス登録まで完了）
+- [ ] development ビルドで実機テスト（セクション6）— 直近の試行は `npm ci` の失敗でエラー、原因は修正済みなので再実行が必要
 - [ ] preview ビルドで TestFlight 内部配布・スクリーンショット撮影
 - [ ] production ビルドを作成する（`eas.json` の `production` プロファイルは `autoIncrement: true` でビルド番号を自動採番する設定済み）
 - [ ] `eas submit -p ios` で App Store Connect にアップロードする（Apple IDのApp用パスワード、またはApp Store Connect APIキーが必要になる場合あり）
@@ -165,10 +162,10 @@ eas submit -p ios                       # App Store Connect へアップロー�
 
 ## まず何からやるべきか（優先順）
 
-1. **Apple Developer Program 登録**（審査に1〜2日かかるので最優先で着手）
-2. 登録完了を待つ間に並行して進められるもの：AdMobアカウント作成、`docs/` を GitHub Pages で公開してURL確定、`STORE_LISTING.md` の掲載文レビュー
-3. ~~Team ID が手に入ったら `app.json` を更新~~ 完了 → 次は `eas build:configure`
-4. `eas build -p ios --profile development` で development build を作り、実機で一通り動作確認（6章）
-5. 問題を直しつつ `preview` ビルドでスクリーンショット撮影・TestFlightで数人にテストしてもらう
+1. ~~Apple Developer Program 登録~~ 完了
+2. ~~Team ID / Bundle ID 反映、AdMob ID 反映、EAS プロジェクト作成~~ 完了
+3. **`eas build -p ios --profile development` を再実行する**（前回は `npm ci` のエラーで失敗、原因は直したので今度は通るはず）→ 実機にインストールして6章の項目を一通り確認
+4. 並行して進められるもの：連絡先メールアドレスの決定、GitHubにプッシュして `docs/` を GitHub Pages で公開、`STORE_LISTING.md` の掲載文レビュー、SKAdNetworkリストの更新
+5. development build で見つかった問題を直しつつ、`preview` ビルドでスクリーンショット撮影・TestFlightで数人にテストしてもらう
 6. App Store Connect のメタデータ（7章）を埋める
 7. `production` ビルド → `eas submit` → 審査提出

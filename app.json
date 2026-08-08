@@ -9,7 +9,7 @@
     "scheme": "eng-daily",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.engdaily.app",
+      "bundleIdentifier": "com.gyudonmaru.engdaily",
       "appleTeamId": "KK84RZRLR8",
       "infoPlist": {
         "NSPhotoLibraryAddUsageDescription": "名言カードを画像として写真に保存するために使用します。",
@@ -17,7 +17,7 @@
       }
     },
     "android": {
-      "package": "com.engdaily.app",
+      "package": "com.gyudonmaru.engdaily",
       "adaptiveIcon": {
         "backgroundColor": "#f3f2f2",
         "foregroundImage": "./assets/android-icon-foreground.png",

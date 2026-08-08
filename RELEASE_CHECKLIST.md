@@ -11,9 +11,9 @@
 - [x] **Apple Developer Program に登録する**（個人登録、Active）
 - [x] **Team ID を確認する**
 - [x] **`app.json` の `ios.appleTeamId` に Team ID を追加する**
-- [ ] **`app.json` の `ios.bundleIdentifier` / `android.package` を本番用の値に変更する**
-  - 今は仮の `com.engdaily.app`。逆ドメイン形式（例: `com.あなたのドメインやアカウント名.engdaily`）で、App Store Connect に登録するBundle IDと一致させる必要がある
-  - この値は**あとから変更できない**（Bundle IDは一度公開すると変更不可）ので、最終的に使いたい値をここで確定させる
+- [x] **`app.json` の `ios.bundleIdentifier` / `android.package` を本番用の値に変更する**
+  - `com.gyudonmaru.engdaily` に決定・反映済み
+  - この値は**あとから変更できない**（Bundle IDは一度公開すると変更不可）ので、App Store Connect でアプリを登録するときも同じ文字列を使うこと
 
 ## 2. アセット（アイコン・スプラッシュ・スクリーンショット）
 

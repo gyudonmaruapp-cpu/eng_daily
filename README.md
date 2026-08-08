@@ -37,11 +37,9 @@ Mac がなくても `npm run web` や Expo Go（実機にアプリをインス�
 
 **この環境には Xcode がないため、ウィジェットは未ビルド・未検証。** ロジック（今日の日付→名言の対応、レイアウト）は書けているが、実際にホーム画面に並べて見た目を確認する作業は Mac か EAS Build が必要。
 
-ビルド前にやること:
+`app.json` の `ios.appleTeamId`（Team ID）と `ios.bundleIdentifier` / `android.package`（`com.gyudonmaru.engdaily`）は設定済み。
 
-1. `app.json` の `expo.ios.appleTeamId` に Apple Developer アカウントの Team ID を追加する（Xcode の Signing & Capabilities タブ、または developer.apple.com で確認できる）。
-2. `app.json` の `ios.bundleIdentifier` / `android.package` は仮で `com.engdaily.app` にしてあるので、自分の Apple Developer アカウントに合わせて変更する。
-3. Mac があれば `npx expo prebuild -p ios --clean` → `xed ios` で Xcode を開いて実機/シミュレータでウィジェットの見た目を確認できる。Mac がなければ EAS Build がプロジェクトを生成してビルドする（後述）。
+Mac があれば `npx expo prebuild -p ios --clean` → `xed ios` で Xcode を開いて実機/シミュレータでウィジェットの見た目を確認できる。Mac がなければ EAS Build がプロジェクトを生成してビルドする（後述）。
 
 名言データを編集したら、ウィジェット側の Swift データも再生成すること:
 

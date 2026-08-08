@@ -12,6 +12,7 @@ Mac なしで iOS アプリ化する方針（企画書参照）に合わせて�
 - **設定**: 通知のON/OFFと時刻、フォントサイズ（S/M/L、アプリ全体に反映）。
 - **シェア**: 名言カードを画像として保存、テキストコピー、X/LINE/Instagram/その他への共有。
 - **ホーム画面ウィジェット**: 「今日の名言」を表示する iOS ウィジェット（WidgetKit）。アプリと同じ日付→名言の対応表をウィジェット側にも埋め込んであるので、アプリを開いていなくても正しい日の名言が出る。
+- **広告（AdMob）**: ホーム画面下部にバナー広告を1枠表示。児童向けタグは付けず、iOS の App Tracking Transparency の同意状況に応じてパーソナライズ/非パーソナライズ広告を出し分ける。
 
 見た目は Modernist デザインシステムのトークン（`_ds/modernist-.../styles.css` で定義されていたもの）を `src/theme/tokens.ts` に移植し、React Native の StyleSheet で再現している。フォントは Archivo（見出し・本文）と Kalam（名言本文、手書き風 — チャットで決まった 1e 案）。
 
@@ -50,6 +51,30 @@ npm run sync-widget-quotes   # src/data/quotes.ts → targets/widget/QuoteData.s
 
 （アプリ本体は JS からいつでも 365 件を参照できるが、ウィジェットは別プロセスで動くネイティブコードなので JS を読み込めない。そのため同じ月日→名言の対応表を Swift 側にも複製してある。）
 
+## 広告（AdMob）
+
+`app.json` の `react-native-google-mobile-ads` プラグイン設定と `src/utils/ads.native.ts` の広告ユニットIDは、今は Google 公式のテストID（プレースホルダー）になっている。実際に収益化する広告を出すには：
+
+1. [AdMob](https://admob.google.com/) でアカウントを作成し、アプリを登録してアプリID・広告ユニットIDを取得する
+2. `app.json` の `iosAppId` / `androidAppId` を取得したアプリIDに差し替える
+3. `src/utils/ads.native.ts` の `BANNER_AD_UNIT_ID`（`TestIds.BANNER`）を取得した広告ユニットIDに差し替える
+4. テストIDのままだと収益は発生しない（Googleのテスト広告のみ表示される）ので、実際の申請・配信前に必ず差し替えること
+
+児童向けタグ（child-directed treatment）は付けていない。中高生だけでなく英語学習者全般を対象とする位置づけのため、Apple の Kids Category にも申請しない想定（申請すると広告SDKが使えなくなる）。
+
+## 利用規約・プライバシーポリシー
+
+`src/screens/LegalScreen.tsx`（アプリ内の設定 → 利用規約・プライバシー から遷移）と `legal/index.html`（ストア掲載用に外部ホスティングする版、内容は同一）に草案がある。**専門家によるレビューを受けていないテンプレート草案** なので、実際に公開する前に確認すること。
+
+`legal/index.html` は GitHub Pages などで簡単にホストできる：
+
+```sh
+# 例: GitHub Pages の場合、リポジトリの Settings → Pages で
+# ブランチ / legal フォルダを公開先に指定するだけ
+```
+
+公開したURLを、App Store Connect の「プライバシーポリシーURL」欄と、`legal/index.html` 内の連絡先メールアドレスに反映すること（今はプレースホルダーの `tujuliangtai@gmail.com` になっている）。
+
 ## EAS Build（クラウドで iOS ビルド）
 
 ```sh
@@ -82,6 +107,7 @@ src/
   navigation/              タブ（今日/アーカイブ/お気に入り/設定）+ Share/QuoteDetail
   screens/                 各画面
 targets/widget/            iOS ホーム画面ウィジェット（Swift）
+legal/index.html           利用規約・プライバシーポリシー（ストア掲載用ホスティング版）
 scripts/sync-widget-quotes.mjs   名言データをウィジェット用Swiftに変換
 ```
 

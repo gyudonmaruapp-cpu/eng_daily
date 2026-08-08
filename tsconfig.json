@@ -1,6 +1,10 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    // Matches Metro's platform-extension resolution (.native.ts wins for
+    // iOS/Android, the primary target here; .web.ts variants are bundled
+    // correctly by Metro for web but aren't separately type-checked).
+    "moduleSuffixes": [".native", ""]
   }
 }

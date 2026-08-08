@@ -3,14 +3,18 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { ChevronRight } from "lucide-react-native";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import Constants from "expo-constants";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ScreenContainer } from "../components/ScreenContainer";
 import { SegmentedControl } from "../components/SegmentedControl";
 import { useAppData } from "../context/AppDataContext";
+import type { RootStackParamList } from "../navigation/RootNavigator";
 import { color, fontFamily, space, type FontSizeKey } from "../theme/tokens";
 
 const FONT_SIZES: readonly FontSizeKey[] = ["S", "M", "L"];
 
 export function SettingsScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { settings, updateSettings } = useAppData();
   const [pickerOpen, setPickerOpen] = useState(false);
 
@@ -83,10 +87,12 @@ export function SettingsScreen() {
 
       <SectionLabel style={styles.sectionGap}>このアプリについて</SectionLabel>
       <Section>
-        <Row>
-          <Text style={styles.rowLabel}>利用規約・プライバシー</Text>
-          <ChevronRight size={14} color={color.text} opacity={0.4} />
-        </Row>
+        <Pressable onPress={() => navigation.navigate("Legal")}>
+          <Row>
+            <Text style={styles.rowLabel}>利用規約・プライバシー</Text>
+            <ChevronRight size={14} color={color.text} opacity={0.4} />
+          </Row>
+        </Pressable>
         <Row last>
           <Text style={styles.rowLabel}>バージョン</Text>
           <Text style={styles.versionText}>{Constants.expoConfig?.version ?? "1.0.0"}</Text>

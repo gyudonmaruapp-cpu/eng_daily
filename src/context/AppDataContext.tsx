@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useS
 import type { FontSizeKey } from "../theme/tokens";
 import { loadJSON, saveJSON } from "../utils/storage";
 import { syncDailyNotification } from "../utils/notifications";
+import { initializeAds } from "../utils/ads";
 
 interface Settings {
   notificationsEnabled: boolean;
@@ -34,6 +35,8 @@ interface AppDataValue {
 
   settings: Settings;
   updateSettings: (patch: Partial<Settings>) => void;
+
+  personalizedAdsAllowed: boolean;
 }
 
 const AppDataContext = createContext<AppDataValue | null>(null);
@@ -43,6 +46,7 @@ export function AppDataProvider({ children }: { children: React.ReactNode }) {
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
   const [viewed, setViewed] = useState<ViewedEntry[]>([]);
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
+  const [personalizedAdsAllowed, setPersonalizedAdsAllowed] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -60,6 +64,9 @@ export function AppDataProvider({ children }: { children: React.ReactNode }) {
         savedSettings.notificationHour,
         savedSettings.notificationMinute
       );
+      initializeAds()
+        .then(({ personalizedAdsAllowed }) => setPersonalizedAdsAllowed(personalizedAdsAllowed))
+        .catch(() => {});
     })();
   }, []);
 
@@ -101,8 +108,9 @@ export function AppDataProvider({ children }: { children: React.ReactNode }) {
       markViewed,
       settings,
       updateSettings,
+      personalizedAdsAllowed,
     }),
-    [ready, favoriteIds, viewed, settings, toggleFavorite, markViewed, updateSettings]
+    [ready, favoriteIds, viewed, settings, toggleFavorite, markViewed, updateSettings, personalizedAdsAllowed]
   );
 
   return <AppDataContext.Provider value={value}>{children}</AppDataContext.Provider>;

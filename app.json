@@ -48,7 +48,21 @@
           "savePhotosPermission": "名言カードを画像として写真に保存するために使用します。"
         }
       ],
-      "@bacons/apple-targets"
+      "@bacons/apple-targets",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511",
+          "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+          "skAdNetworkItems": ["cstr6suwn9.skadnetwork"]
+        }
+      ],
+      [
+        "expo-tracking-transparency",
+        {
+          "userTrackingPermission": "この許可は、あなたの興味に合わせた広告を表示するために使われます。許可しなくてもアプリは通常どおり使えます。"
+        }
+      ]
     ]
   }
 }

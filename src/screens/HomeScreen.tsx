@@ -10,6 +10,7 @@ import { ScreenContainer } from "../components/ScreenContainer";
 import { QuoteMemoCard } from "../components/QuoteMemoCard";
 import { Button } from "../components/Button";
 import { OutlineTag } from "../components/Tag";
+import { AdBanner } from "../components/AdBanner";
 import { useAppData } from "../context/AppDataContext";
 import { color, fontFamily, space } from "../theme/tokens";
 import { dateKey, dayOfYear, formatJapaneseDate, quoteForDate } from "../utils/date";
@@ -84,6 +85,10 @@ export function HomeScreen(_props: Props) {
       >
         <Text style={styles.archiveButtonText}>アーカイブを見る（過去にめくった分）</Text>
       </Pressable>
+
+      <View style={styles.adSlot}>
+        <AdBanner />
+      </View>
     </ScreenContainer>
   );
 }
@@ -136,4 +141,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: color.accent700,
   },
+  adSlot: { paddingTop: space[4] },
 });

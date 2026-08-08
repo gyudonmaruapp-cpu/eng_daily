@@ -6,7 +6,7 @@ import { ScreenContainer } from "../components/ScreenContainer";
 import { color, fontFamily, space } from "../theme/tokens";
 
 const LAST_UPDATED = "2026年8月9日";
-const CONTACT_EMAIL = "tujuliangtai@gmail.com";
+const CONTACT_EMAIL = "gyudonmaru.app@gmail.com";
 const APP_NAME = "英語名言 日めくりカレンダー";
 
 export function LegalScreen() {

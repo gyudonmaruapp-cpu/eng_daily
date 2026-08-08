@@ -14,7 +14,7 @@ Mac なしで iOS アプリ化する方針（企画書参照）に合わせて�
 - **ホーム画面ウィジェット**: 「今日の名言」を表示する iOS ウィジェット（WidgetKit）。アプリと同じ日付→名言の対応表をウィジェット側にも埋め込んであるので、アプリを開いていなくても正しい日の名言が出る。
 - **広告（AdMob）**: ホーム画面下部にバナー広告を1枠表示。児童向けタグは付けず、iOS の App Tracking Transparency の同意状況に応じてパーソナライズ/非パーソナライズ広告を出し分ける。
 
-見た目は Modernist デザインシステムのトークン（`_ds/modernist-.../styles.css` で定義されていたもの）を `src/theme/tokens.ts` に移植し、React Native の StyleSheet で再現している。フォントは Archivo（見出し・本文）と Kalam（名言本文、手書き風 — チャットで決まった 1e 案）。
+見た目は Modernist デザインシステムのトークン（`_ds/modernist-.../styles.css` で定義されていたもの）を `src/theme/tokens.ts` に移植し、React Native の StyleSheet で再現している。フォントは Archivo（見出し・本文）と Kalam（名言本文、手書き風。チャットで決まった 1e 案）。
 
 ## セットアップ
 

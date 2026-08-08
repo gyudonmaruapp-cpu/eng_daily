@@ -66,9 +66,10 @@
     - `docs/index.html`：アプリ紹介（マーケティングURL用）
     - `docs/privacy.html`：利用規約・プライバシーポリシー（**プライバシーポリシーURL用**）
     - `docs/support.html`：サポート・FAQ・問い合わせ先（**サポートURL用**）
-- [ ] **公開設定をONにしてURLを確定する** **[要ユーザー]**
-  - GitHub にプッシュ後、リポジトリの Settings → Pages → Source で「Deploy from a branch」→ ブランチ `main` / フォルダ `/docs` を選ぶ
-  - GitHub を使わない場合は [Netlify Drop](https://app.netlify.com/drop) に `docs` フォルダをドラッグ＆ドロップするだけでも即座に公開URLが出る
+- [x] GitHub にプッシュ済み（`https://github.com/gyudonmaruapp-cpu/eng_daily`、Public）
+- [ ] **GitHub Pages の公開設定をONにしてURLを確定する** **[要ユーザー]**
+  - リポジトリの Settings → Pages → Source で「Deploy from a branch」→ ブランチ `main` / フォルダ `/docs` を選ぶ
+  - 公開されるURLはおそらく `https://gyudonmaruapp-cpu.github.io/eng_daily/`
 - [ ] 確定したURLを App Store Connect の「プライバシーポリシーURL」「サポートURL」欄に入力する（`STORE_LISTING.md` にURLの雛形あり）
 
 ## 5. iOS ウィジェット（WidgetKit）
@@ -155,7 +156,7 @@ eas submit -p ios                       # App Store Connect へアップロー�
 - [ ] Android 対応の検討（企画書どおり、今回のスコープ外。Expo なので同一コードベースでほぼ対応可能。AdMobの `androidAppId` は既にプレースホルダーを用意済み）
 - [ ] 名言データの追加・見直し（現状365件、月日固定で毎年循環。ユーザーからの指摘があれば `src/data/quotes.ts` を直して `npm run sync-widget-quotes` を忘れずに）
 - [ ] 学校・塾向けB2Cライセンスなど、企画書にあったマネタイズ案の検証
-- [ ] リモートリポジトリ（GitHub等）へのプッシュ（現状ローカルのみ。バックアップ・共同作業のため推奨。EAS Buildもリポジトリ連携すると自動ビルドなどが組みやすくなる）
+- [x] リモートリポジトリ（GitHub）へのプッシュ
 - [ ] クラッシュ・エラー監視の導入検討（Sentry等。今は何も入っていないので、審査後に問題があっても気づきにくい）
 
 ---
@@ -164,8 +165,9 @@ eas submit -p ios                       # App Store Connect へアップロー�
 
 1. ~~Apple Developer Program 登録~~ 完了
 2. ~~Team ID / Bundle ID 反映、AdMob ID 反映、EAS プロジェクト作成~~ 完了
-3. **`eas build -p ios --profile development` を再実行する**（前回は `npm ci` のエラーで失敗、原因は直したので今度は通るはず）→ 実機にインストールして6章の項目を一通り確認
-4. 並行して進められるもの：連絡先メールアドレスの決定、GitHubにプッシュして `docs/` を GitHub Pages で公開、`STORE_LISTING.md` の掲載文レビュー、SKAdNetworkリストの更新
-5. development build で見つかった問題を直しつつ、`preview` ビルドでスクリーンショット撮影・TestFlightで数人にテストしてもらう
-6. App Store Connect のメタデータ（7章）を埋める
-7. `production` ビルド → `eas submit` → 審査提出
+3. ~~連絡先メールアドレス決定、GitHubへのプッシュ~~ 完了
+4. **`eas build -p ios --profile development` を再実行する**（`npm ci` の失敗 → 修正済み、ウィジェットのSwiftコンパイルエラー → 修正済み。今度こそ通るはず）→ 実機にインストールして6章の項目を一通り確認
+5. 並行して進められるもの：GitHub Pages の公開設定をON、`STORE_LISTING.md` の掲載文レビュー、SKAdNetworkリストの更新
+6. development build で見つかった問題を直しつつ、`preview` ビルドでスクリーンショット撮影・TestFlightで数人にテストしてもらう
+7. App Store Connect のメタデータ（7章）を埋める
+8. `production` ビルド → `eas submit` → 審査提出

@@ -29,7 +29,7 @@ struct QuoteEntry: TimelineEntry {
 }
 
 private let inkColor = Color(red: 32.0 / 255.0, green: 30.0 / 255.0, blue: 29.0 / 255.0)
-private let accentColor = Color(red: 236.0 / 255.0, green: 48.0 / 255.0, blue: 19.0 / 255.0)
+private let brandAccent = Color(red: 236.0 / 255.0, green: 48.0 / 255.0, blue: 19.0 / 255.0)
 private let accent700 = Color(red: 174.0 / 255.0, green: 24.0 / 255.0, blue: 0.0 / 255.0)
 private let surfaceColor = Color(red: 234.0 / 255.0, green: 233.0 / 255.0, blue: 233.0 / 255.0)
 
@@ -55,11 +55,12 @@ struct TodayQuoteWidgetEntryView: View {
         .padding(12)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .overlay(alignment: .top) {
-            // Color itself conforms to View, so this avoids Shape.fill(_:)
-            // entirely -- that call was the one Xcode flagged as a bogus
-            // "cannot conform to ShapeStyle" error across two builds, even
-            // after ruling out the color literals themselves as the cause.
-            accentColor.frame(height: 3)
+            // Named brandAccent (not accentColor) because SwiftUI's
+            // deprecated View.accentColor(_:) modifier shadows a bare
+            // `let accentColor` inside a View's body -- unqualified lookup
+            // resolves to the instance method's curried reference instead,
+            // which broke both earlier attempts here.
+            brandAccent.frame(height: 3)
         }
         .containerBackground(surfaceColor, for: .widget)
     }

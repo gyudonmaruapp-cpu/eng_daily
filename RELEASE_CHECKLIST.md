@@ -74,6 +74,7 @@
 ## 5. iOS ウィジェット（WidgetKit）
 
 - [x] ウィジェットのコード実装（`targets/widget/`、SwiftUI）
+- [x] 小・中・大（systemSmall/Medium/Large）の3サイズに対応済み。中・大では和訳も表示する
 - [ ] **実際にビルドして初めて見た目を確認する** **[要ユーザー]**
   - **Macは無くても大丈夫**：EAS Build がクラウド上でネイティブビルド（ウィジェット込み）を行い、Xcodeなしで `.ipa` が生成できる
   - 流れ：`eas build -p ios --profile preview` → ビルド完了後 TestFlight（内部テスト）配布 → 自分のiPhoneにインストール → ホーム画面にウィジェットを追加して確認、という手順で完結する

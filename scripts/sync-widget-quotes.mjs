@@ -15,7 +15,7 @@ function swiftString(s) {
 
 const entries = QUOTES.map(
   (q) =>
-    `        DailyQuote(month: ${q.month}, day: ${q.day}, en: "${swiftString(q.en)}", author: "${swiftString(q.author)}"),`
+    `        DailyQuote(month: ${q.month}, day: ${q.day}, en: "${swiftString(q.en)}", ja: "${swiftString(q.ja)}", author: "${swiftString(q.author)}"),`
 ).join("\n");
 
 const swift = `import Foundation
@@ -29,6 +29,7 @@ struct DailyQuote {
     let month: Int
     let day: Int
     let en: String
+    let ja: String
     let author: String
 }
 

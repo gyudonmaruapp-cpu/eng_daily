@@ -19,7 +19,10 @@ import { Button } from "../components/Button";
 import { color, fontFamily, space } from "../theme/tokens";
 import { quoteById } from "../utils/date";
 
-const MARKETING_URL = "https://gyudonmaruapp-cpu.github.io/eng_daily/";
+// App Store Connect's numeric app id (visible under App Information →
+// Apple ID). This resolves once the app is live; until then it 404s,
+// but it needs no code change at launch since it's assigned already.
+const APP_STORE_URL = "https://apps.apple.com/jp/app/id6799548051";
 
 export function ShareSheetScreen() {
   const navigation = useNavigation();
@@ -30,7 +33,7 @@ export function ShareSheetScreen() {
   const quote = quoteById(route.params.quoteId);
   if (!quote) return null;
 
-  const shareText = `"${quote.en}"\n${quote.ja}\n— ${quote.author}\n\n英語名言 日めくりカレンダー\n${MARKETING_URL}`;
+  const shareText = `"${quote.en}"\n${quote.ja}\n— ${quote.author}\n\n英語名言 日めくりカレンダー\n${APP_STORE_URL}`;
 
   const captureCardImage = async () => {
     if (!cardRef.current) return null;

@@ -46,7 +46,12 @@ private struct WidgetLabel: View {
 /// content view wraps its body in this.
 private struct WidgetFrame<Content: View>: View {
     let padding: CGFloat
-    @ViewBuilder let content: Content
+    let content: Content
+
+    init(padding: CGFloat, @ViewBuilder content: () -> Content) {
+        self.padding = padding
+        self.content = content()
+    }
 
     var body: some View {
         content

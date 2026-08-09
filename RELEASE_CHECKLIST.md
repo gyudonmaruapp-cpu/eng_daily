@@ -152,8 +152,10 @@ eas submit -p ios                       # App Store Connect へアップロー�
 - [x] preview ビルドでスクリーンショット撮影完了（TestFlight配布はスキップし、リサイズしたスクショをApp Store Connectに直接アップロード）
 - [x] production ビルドを作成する（`eas.json` の `production` プロファイルは `autoIncrement: true` でビルド番号を自動採番する設定済み。ビルド番号1→2で成功）
 - [x] `eas submit -p ios` で App Store Connect にアップロードする（App Store Connect APIキーをAPP_MANAGER権限で自動生成する方式で完了。ビルド番号2をアップロード済み、Appleの処理待ち）
-- [ ] App Store Connect側でビルドを選択し、審査に提出する
-- [ ] Apple の審査を通過する（通常1〜3日程度。広告・データ収集申告の不備で差し戻されることが多いので、7章を丁寧にやっておくと通りやすい）
+- [x] App Store Connect側でビルドを選択し、審査に提出する
+  - 「審査用に追加」で著作権・連絡先情報・App Privacy未公開のエラーが出たが、著作権（`2026 Ryota Doi`）・連絡先情報を入力し、App Privacyを公開して解消。無事提出完了
+- [ ] Apple の審査を通過する（通常1〜3日程度。broken linkやガイドライン違反があれば却下理由がメールで届く。届いたらその内容を見て対応）
+- [ ] 審査通過後、公開方法を確認する（App Store Connectの「バージョンリリース」設定 — 承認後に自動で即公開されるか、手動でリリースボタンを押すまで待つか。今の設定を確認しておく）
 
 ## 9. 公開後（やらなくてもいいが検討事項）
 

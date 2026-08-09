@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Archive, Heart, Settings, Sun } from "lucide-react-native";
 import { StyleSheet, Text } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { HomeScreen } from "../screens/HomeScreen";
 import { ArchiveScreen } from "../screens/ArchiveScreen";
 import { FavoritesScreen } from "../screens/FavoritesScreen";
@@ -20,13 +21,17 @@ const Tab = createBottomTabNavigator<TabParamList>();
 const ICONS = { 今日: Sun, アーカイブ: Archive, お気に入り: Heart, 設定: Settings } as const;
 
 export function TabNavigator() {
+  const insets = useSafeAreaInsets();
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarActiveTintColor: color.accent,
         tabBarInactiveTintColor: color.text,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: [
+          styles.tabBar,
+          { height: 64 + insets.bottom, paddingBottom: insets.bottom },
+        ],
         tabBarItemStyle: styles.tabItem,
         tabBarIcon: ({ color: c, size }) => {
           const Icon = ICONS[route.name];

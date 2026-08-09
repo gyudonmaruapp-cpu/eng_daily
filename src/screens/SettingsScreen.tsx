@@ -59,7 +59,7 @@ export function SettingsScreen() {
           value={pickerValue}
           mode="time"
           display={Platform.OS === "ios" ? "spinner" : "default"}
-          onChange={(_event, date) => {
+          onValueChange={(_event, date) => {
             setPickerOpen(Platform.OS === "ios");
             if (date) {
               updateSettings({ notificationHour: date.getHours(), notificationMinute: date.getMinutes() });

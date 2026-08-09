@@ -26,6 +26,7 @@ export function QuoteMemoCard({ quote, compact = false, fontSize = "M" }: Props)
         {Array.from({ length: HOLE_COUNT }).map((_, i) => (
           <View key={i} style={[styles.hole, compact && styles.holeCompact]} />
         ))}
+        <PerforationLine />
       </View>
       <View style={[styles.body, compact ? styles.bodyCompact : styles.bodyFull]}>
         <RuledLines lineHeight={lineHeight} />
@@ -37,6 +38,27 @@ export function QuoteMemoCard({ quote, compact = false, fontSize = "M" }: Props)
           <Text style={[styles.author, compact && styles.authorCompact]}>— {quote.author}</Text>
         </View>
       </View>
+    </View>
+  );
+}
+
+const DASH_WIDTH = 5;
+const DASH_GAP = 4;
+
+/** Manually-drawn dashed rule. RN's native `borderStyle: "dashed"` is
+ * unsupported under the New Architecture and silently no-ops. */
+function PerforationLine() {
+  const [width, setWidth] = React.useState(0);
+  const count = Math.ceil(width / (DASH_WIDTH + DASH_GAP));
+  return (
+    <View
+      style={styles.perforation}
+      pointerEvents="none"
+      onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
+    >
+      {Array.from({ length: count }).map((_, i) => (
+        <View key={i} style={styles.dash} />
+      ))}
     </View>
   );
 }
@@ -64,11 +86,24 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     paddingVertical: 9,
     paddingHorizontal: 18,
-    borderBottomWidth: 2,
-    borderStyle: "dashed",
-    borderBottomColor: color.divider,
+    position: "relative",
   },
   holesRowCompact: { paddingVertical: 7, paddingHorizontal: 16 },
+  perforation: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 2,
+    flexDirection: "row",
+    overflow: "hidden",
+  },
+  dash: {
+    width: DASH_WIDTH,
+    height: 2,
+    marginRight: DASH_GAP,
+    backgroundColor: color.divider,
+  },
   hole: {
     width: 13,
     height: 13,

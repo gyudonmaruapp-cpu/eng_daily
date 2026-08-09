@@ -87,11 +87,11 @@
 - [x] `expo-dev-client` を導入済み（development build に必須、これが無いとビルド自体が拒否される）
 - [x] EAS の証明書・プロビジョニングプロファイルをセットアップ済み（本体・ウィジェット両方のBundle ID分。デバイス登録も完了）
 - [x] `npm ci` がビルドサーバー上で失敗する問題を修正済み（`@expo/require-utils` のバージョン不整合が原因、`package.json` に `overrides` を追加して解決）
-- [ ] **development build を作る**（Expo Go の代わりに、このアプリ専用のネイティブモジュール込みインストーラ）
+- [x] **development build を作る**（Expo Go の代わりに、このアプリ専用のネイティブモジュール込みインストーラ）
   ```sh
   eas build -p ios --profile development
   ```
-  `eas.json` の `development` プロファイルは既に用意済み（`developmentClient: true`）。前回の試行は上記の `npm ci` 問題で失敗しているので、**再実行が必要**
+  `npm ci` の問題とウィジェットのSwiftコンパイルエラー（`accentColor`とSwiftUIの`View.accentColor(_:)`修飾子の名前衝突）を修正し、ビルド成功済み
 - [ ] ビルドしたdevelopment buildを実機にインストールし、`npx expo start --dev-client` でJS側をつないで開発・確認する（コード変更のたびにネイティブビルドし直さなくてよい）
 - [ ] 全画面を一通り触る（ホーム/アーカイブ/お気に入り/設定/シェア）
 - [ ] 通知：設定画面で時刻を変更 → 実際にその時刻に通知が届くか確認（許可ダイアログが出るはず）

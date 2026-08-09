@@ -31,7 +31,7 @@ export function FavoritesScreen() {
         style={styles.list}
         ItemSeparatorComponent={() => <View style={styles.rowDivider} />}
         ListEmptyComponent={
-          <Text style={styles.empty}>まだお気に入りはありません。ホームでハートを押すと追加されます。</Text>
+          <Text style={styles.empty}>{"まだお気に入りはありません。\nホームでハートを押すと追加されます。"}</Text>
         }
         renderItem={({ item }) => (
           <Pressable

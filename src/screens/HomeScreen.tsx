@@ -12,7 +12,7 @@ import { Button } from "../components/Button";
 import { OutlineTag } from "../components/Tag";
 import { AdBanner } from "../components/AdBanner";
 import { useAppData } from "../context/AppDataContext";
-import { color, fontFamily, space } from "../theme/tokens";
+import { color, fontFamily, fontSizeScale, space } from "../theme/tokens";
 import { dateKey, dayOfYear, formatJapaneseDate, quoteForDate } from "../utils/date";
 
 type Props = BottomTabScreenProps<TabParamList, "今日">;
@@ -38,6 +38,7 @@ export function HomeScreen(_props: Props) {
   }
 
   const favorite = isFavorite(quote.id);
+  const scale = fontSizeScale[settings.fontSize];
 
   return (
     <ScreenContainer contentStyle={styles.content}>
@@ -53,11 +54,11 @@ export function HomeScreen(_props: Props) {
 
       <View style={styles.textBlock}>
         <Text style={styles.sectionLabel}>和訳</Text>
-        <Text style={styles.translation}>{quote.ja}</Text>
+        <Text style={[styles.translation, { fontSize: 15 * scale }]}>{quote.ja}</Text>
       </View>
       <View style={styles.textBlock}>
         <Text style={[styles.sectionLabel, styles.memoLabel]}>MEMO</Text>
-        <Text style={styles.memo}>{quote.note}</Text>
+        <Text style={[styles.memo, { fontSize: 13 * scale }]}>{quote.note}</Text>
       </View>
 
       <View style={styles.spacer} />

@@ -8,7 +8,7 @@ import { ScreenContainer } from "../components/ScreenContainer";
 import { QuoteMemoCard } from "../components/QuoteMemoCard";
 import { Button } from "../components/Button";
 import { useAppData } from "../context/AppDataContext";
-import { color, fontFamily, space } from "../theme/tokens";
+import { color, fontFamily, fontSizeScale, space } from "../theme/tokens";
 import { quoteById } from "../utils/date";
 
 export function QuoteDetailScreen() {
@@ -19,6 +19,7 @@ export function QuoteDetailScreen() {
   const quote = quoteById(route.params.quoteId);
   if (!quote) return null;
   const favorite = isFavorite(quote.id);
+  const scale = fontSizeScale[settings.fontSize];
 
   return (
     <ScreenContainer contentStyle={styles.content}>
@@ -31,11 +32,11 @@ export function QuoteDetailScreen() {
 
       <View style={styles.textBlock}>
         <Text style={styles.sectionLabel}>和訳</Text>
-        <Text style={styles.translation}>{quote.ja}</Text>
+        <Text style={[styles.translation, { fontSize: 15 * scale }]}>{quote.ja}</Text>
       </View>
       <View style={styles.textBlock}>
         <Text style={[styles.sectionLabel, styles.memoLabel]}>MEMO</Text>
-        <Text style={styles.memo}>{quote.note}</Text>
+        <Text style={[styles.memo, { fontSize: 13 * scale }]}>{quote.note}</Text>
       </View>
 
       <View style={styles.actionsRow}>

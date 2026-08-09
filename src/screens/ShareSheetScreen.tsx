@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import * as Clipboard from "expo-clipboard";
 import * as MediaLibrary from "expo-media-library";
-import * as Sharing from "expo-sharing";
 import { captureRef } from "react-native-view-shot";
 import { useNavigation, useRoute, type RouteProp } from "@react-navigation/native";
 import type { RootStackParamList } from "../navigation/RootNavigator";
@@ -19,6 +18,8 @@ import { QuoteMemoCard } from "../components/QuoteMemoCard";
 import { Button } from "../components/Button";
 import { color, fontFamily, space } from "../theme/tokens";
 import { quoteById } from "../utils/date";
+
+const MARKETING_URL = "https://gyudonmaruapp-cpu.github.io/eng_daily/";
 
 export function ShareSheetScreen() {
   const navigation = useNavigation();
@@ -29,7 +30,7 @@ export function ShareSheetScreen() {
   const quote = quoteById(route.params.quoteId);
   if (!quote) return null;
 
-  const shareText = `"${quote.en}"\n${quote.ja}\n— ${quote.author}`;
+  const shareText = `"${quote.en}"\n${quote.ja}\n— ${quote.author}\n\n英語名言 日めくりカレンダー\n${MARKETING_URL}`;
 
   const captureCardImage = async () => {
     if (!cardRef.current) return null;
@@ -70,23 +71,6 @@ export function ShareSheetScreen() {
     Linking.openURL(url).catch(() => Alert.alert("開けませんでした"));
   };
 
-  const handleShareInstagram = async () => {
-    setBusy("instagram");
-    try {
-      const uri = await captureCardImage();
-      if (!uri) return;
-      if (await Sharing.isAvailableAsync()) {
-        await Sharing.shareAsync(uri, { mimeType: "image/png", dialogTitle: "シェア" });
-      } else {
-        await RNShare.share({ message: shareText });
-      }
-    } catch {
-      // user cancelled or share failed silently — no toast needed
-    } finally {
-      setBusy(null);
-    }
-  };
-
   const handleShareOther = async () => {
     try {
       await RNShare.share(Platform.OS === "ios" ? { message: shareText } : { message: shareText, title: "シェア" });
@@ -111,11 +95,10 @@ export function ShareSheetScreen() {
           <Button label="テキストをコピー" variant="secondary" style={styles.flex} onPress={handleCopyText} />
         </View>
 
-        <View style={styles.grid}>
-          <Button label="Instagramに共有" variant="secondary" style={styles.gridItem} onPress={handleShareInstagram} disabled={busy === "instagram"} />
-          <Button label="Xに共有" variant="secondary" style={styles.gridItem} onPress={handleShareX} />
-          <Button label="LINEに共有" variant="secondary" style={styles.gridItem} onPress={handleShareLine} />
-          <Button label="その他" variant="secondary" style={styles.gridItem} onPress={handleShareOther} />
+        <View style={styles.row}>
+          <Button label="Xに共有" variant="secondary" style={styles.flex} onPress={handleShareX} />
+          <Button label="LINEに共有" variant="secondary" style={styles.flex} onPress={handleShareLine} />
+          <Button label="その他" variant="secondary" style={styles.flex} onPress={handleShareOther} />
         </View>
       </View>
     </View>
@@ -137,6 +120,4 @@ const styles = StyleSheet.create({
   title: { fontFamily: fontFamily.headingBold, fontSize: 20, color: color.text },
   row: { flexDirection: "row", gap: space[2] },
   flex: { flex: 1 },
-  grid: { flexDirection: "row", flexWrap: "wrap", gap: space[2] },
-  gridItem: { width: "48%" },
 });

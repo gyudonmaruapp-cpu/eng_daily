@@ -35,7 +35,15 @@ export function QuoteMemoCard({ quote, compact = false, fontSize = "M" }: Props)
           <Text style={[styles.quoteText, { fontSize: quoteSize, lineHeight: quoteSize * 1.35 }]}>
             &ldquo;{quote.en}&rdquo;
           </Text>
-          <Text style={[styles.author, compact && styles.authorCompact]}>— {quote.author}</Text>
+          <Text
+            style={[
+              styles.author,
+              compact && styles.authorCompact,
+              { fontSize: (compact ? 11 : 13) * scale },
+            ]}
+          >
+            — {quote.author}
+          </Text>
         </View>
       </View>
     </View>

@@ -148,10 +148,10 @@ eas submit -p ios                       # App Store Connect へアップロー�
 ```
 
 - [x] `eas login` / `eas init` / `eas build:configure` を実行済み（Expoプロジェクト作成・iOS証明書とプロビジョニングプロファイル生成・デバイス登録まで完了）
-- [ ] development ビルドで実機テスト（セクション6）— 直近の試行は `npm ci` の失敗でエラー、原因は修正済みなので再実行が必要
-- [ ] preview ビルドで TestFlight 内部配布・スクリーンショット撮影
+- [x] development ビルドで実機テスト（セクション6）完了
+- [x] preview ビルドでスクリーンショット撮影完了（TestFlight配布はスキップし、リサイズしたスクショをApp Store Connectに直接アップロード）
 - [x] production ビルドを作成する（`eas.json` の `production` プロファイルは `autoIncrement: true` でビルド番号を自動採番する設定済み。ビルド番号1→2で成功）
-- [ ] `eas submit -p ios` で App Store Connect にアップロードする（Apple IDのApp用パスワード、またはApp Store Connect APIキーが必要になる場合あり）
+- [x] `eas submit -p ios` で App Store Connect にアップロードする（App Store Connect APIキーをAPP_MANAGER権限で自動生成する方式で完了。ビルド番号2をアップロード済み、Appleの処理待ち）
 - [ ] App Store Connect側でビルドを選択し、審査に提出する
 - [ ] Apple の審査を通過する（通常1〜3日程度。広告・データ収集申告の不備で差し戻されることが多いので、7章を丁寧にやっておくと通りやすい）
 
